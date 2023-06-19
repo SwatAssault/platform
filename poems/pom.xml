@@ -10,7 +10,16 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>platform-base</artifactId>
+    <artifactId>poems</artifactId>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.project</groupId>
+            <artifactId>platform-base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 </project>
