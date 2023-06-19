@@ -1,8 +1,11 @@
 package com.project.poems.bean;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.project.platfrom.base.http.HttpRequester;
 import com.project.platfrom.base.http.Payload;
+import com.project.platfrom.base.json.JsonMarshaller;
 import com.project.poems.api.PoemsService;
+import com.project.poems.dto.AllAuthorsDTO;
 import com.project.poems.utils.PoemsUrls;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,13 +28,13 @@ public class PoemsServiceImpl implements PoemsService {
     }
 
     @Override
-    public String getAllAuthors() {
-        Payload<String> payload = processResponse(
+    public AllAuthorsDTO getAllAuthors() {
+        Payload<AllAuthorsDTO> payload = processResponse(
                 httpRequester.get(
                         PoemsUrls.Endpoint.AUTHORS.getUrl(),
                         null
                 ),
-                (response) -> response
+                (response) -> JsonMarshaller.unmarshall(response, new TypeReference<>() {})
         );
 
         if (payload.getResponseObject() == null) {

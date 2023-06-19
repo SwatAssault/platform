@@ -1,6 +1,7 @@
 package com.project.poems.controller;
 
 import com.project.poems.api.PoemsService;
+import com.project.poems.dto.AllAuthorsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,12 @@ public class PoemsController {
 
     @GetMapping("authors/")
     public String getAllAuthors() {
-        return poemsService.getAllAuthors();
+        StringBuilder result = new StringBuilder();
+        AllAuthorsDTO authors = poemsService.getAllAuthors();
+        if (authors != null) {
+            result.append("Авторы: </br>");
+            result.append(String.join(", </br>", authors.getAuthors()));
+        }
+        return result.toString();
     }
 }
