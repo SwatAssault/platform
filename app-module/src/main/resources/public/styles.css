@@ -1,0 +1,94 @@
+/*TODO добавить папку для стилей и поместить туда этот файл, изменить ссылку на css файлы в html файлах*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    min-height: 100%;
+}
+
+header {
+    position: relative;
+    display: flex;
+    background-color: rgba(54, 54, 54);
+    margin-bottom: 10px;
+
+}
+
+header #menu {
+    display: flex;
+    flex-direction: row;
+}
+
+header #menu button{
+    border: 0;
+    line-height: 2.5;
+    border-radius: 10px;
+    padding: 0 20px;
+    margin: 25px;
+    background-color: rgba(54, 54, 54);
+    color: white;
+}
+
+header #reg {
+    position: absolute;
+    top: -10px;
+    right: 5%;
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+}
+header #reg a {
+    margin: 10px;
+    padding: 10px;
+    text-decoration: none;
+    font: 14px "Times New Roman";
+    color: white;
+}
+
+header #menu button.active, #menu button:hover {
+    color: rgba(0, 0, 0, 0.788);
+    background-color: white;
+}
+
+
+#content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+main h2{
+    text-align: center;
+    font: 30px "Times New Roman";
+}
+
+main p {
+    border: 1px solid black;
+    width: 800px;
+    text-align: justify;
+    font: 14px "Times New Roman";
+}
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    background-color: rgba(79, 79, 79);
+}
+
+footer a{
+    text-decoration: none;
+    font: 12px "Times New Roman";
+    padding: 0 20px;
+    margin: 25px;
+    background-color: rgba(79, 79, 79);
+    color: white;
+}
+
+header #reg a:hover, footer a:hover {
+    text-decoration: underline;
+}
