@@ -1,15 +1,16 @@
 package com.project.poems.api;
 
+import com.project.poems.dto.AllAuthorsDTO;
+
 /**
- *  Сервис интерграции с PoemsDB
+ *  Сервис интеграции с PoemsDB
  */
 public interface PoemsService {
 
-    // TODO передалать под dto
     /**
      * Получение всех авторов
      *
-     * @return json со всеми аторами
+     * @return {@link AllAuthorsDTO}
      */
-    String getAllAuthors();
+    AllAuthorsDTO getAllAuthors();
 }
