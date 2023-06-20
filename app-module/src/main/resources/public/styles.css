@@ -52,7 +52,6 @@ header #menu button.active, #menu button:hover {
     background-color: white;
 }
 
-
 #content {
     display: flex;
     flex-direction: column;
