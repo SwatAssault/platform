@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("poems/")
+@RequestMapping("/poems")
 public class PoemsController {
 
     private final PoemsService poemsService;
@@ -18,7 +18,7 @@ public class PoemsController {
         this.poemsService = poemsService;
     }
 
-    @GetMapping("authors/")
+    @GetMapping("/authors")
     public String getAllAuthors() {
         StringBuilder result = new StringBuilder();
         AllAuthorsDTO authors = poemsService.getAllAuthors();
