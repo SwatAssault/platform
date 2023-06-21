@@ -6,6 +6,11 @@ function test() {
         dataType: 'json',
         success: function (response) {
             console.log(response);
+            $('#api-result').text(JSON.stringify(response))
         }
     });
+}
+
+function clean() {
+    $('#api-result').text('');
 }
