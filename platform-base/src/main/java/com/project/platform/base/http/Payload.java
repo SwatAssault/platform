@@ -1,4 +1,4 @@
-package com.project.platfrom.base.http;
+package com.project.platform.base.http;
 
 import org.springframework.http.HttpStatus;
 

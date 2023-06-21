@@ -1,4 +1,4 @@
-package com.project.platfrom.base.json;
+package com.project.platform.base.json;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -7,8 +7,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.project.platfrom.base.exception.JsonDeserializeException;
-import com.project.platfrom.base.exception.JsonSerializeException;
+import com.project.platform.base.exception.JsonSerializeException;
+import com.project.platform.base.exception.JsonDeserializeException;
 
 public final class JsonMarshaller {
 

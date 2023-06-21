@@ -1,4 +1,4 @@
-package com.project.platfrom.base.exception;
+package com.project.platform.base.exception;
 
 
 public class JsonSerializeException extends RuntimeException {

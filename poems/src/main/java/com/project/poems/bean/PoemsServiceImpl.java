@@ -1,9 +1,9 @@
 package com.project.poems.bean;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.project.platfrom.base.http.HttpRequester;
-import com.project.platfrom.base.http.Payload;
-import com.project.platfrom.base.json.JsonMarshaller;
+import com.project.platform.base.http.HttpRequester;
+import com.project.platform.base.http.Payload;
+import com.project.platform.base.json.JsonMarshaller;
 import com.project.poems.api.PoemsService;
 import com.project.poems.dto.AllAuthorsDTO;
 import com.project.poems.utils.PoemsUrls;
