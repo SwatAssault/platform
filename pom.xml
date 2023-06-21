@@ -37,8 +37,9 @@
     </dependencies>
 
     <modules>
+        <module>app-module</module>
         <module>platform-base</module>
         <module>poems</module>
-        <module>app-module</module>
+        <module>blog</module>
     </modules>
 </project>

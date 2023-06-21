@@ -28,6 +28,11 @@
             <artifactId>poems</artifactId>
             <version>${platform-version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.project</groupId>
+            <artifactId>blog</artifactId>
+            <version>${platform-version}</version>
+        </dependency>
     </dependencies>
 
     <build>
