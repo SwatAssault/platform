@@ -1,0 +1,5 @@
+Инструкция по деплою
+
+1. скачать и установить mysql server 8.0.33.0
+2. создать БД "platform"
+3. сконфигурировать параметры подключения к БД в app-module/src/resources/application.properties

@@ -4,13 +4,18 @@ import com.project.blog.person.api.PersonService;
 import com.project.blog.person.exception.CreatePersonException;
 import com.project.blog.person.model.Person;
 import com.project.blog.person.repository.PersonRepository;
+import com.project.platform.base.bean.BaseService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PersonServiceImpl implements PersonService {
+public class PersonServiceImpl extends BaseService implements PersonService {
+    private final Logger logger = LoggerFactory.getLogger(PersonServiceImpl.class);
 
     private final PersonRepository personRepository;
 
@@ -21,12 +26,12 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<Person> getAllPeople() {
-        return personRepository.getPeople();
+        return (List<Person>) personRepository.findAll();
     }
 
     @Override
     public Person getPerson(String userName) {
-        return personRepository.getPerson(userName);
+        return personRepository.findByUserName(userName);
     }
 
     @Override
@@ -34,10 +39,16 @@ public class PersonServiceImpl implements PersonService {
         if (person == null || person.getUserName() == null || person.getEmail() == null) {
             throw new CreatePersonException("Insufficient data provided for creating person");
         }
-        String userName = person.getUserName();
-        if (personRepository.getPerson(userName) != null) {
-            throw new CreatePersonException(String.format("Error creating person with username = %s. Person already exists", userName));
+        Person existingPerson = personRepository.findByUserName(person.getUserName());
+        if (existingPerson != null) {
+            String message = String.format(getMessage("person.with.username.exists", "Пользователь с именем %s уже существует"), person.getUserName());
+            throw new CreatePersonException(message);
         }
-        personRepository.addPerson(person);
+        try {
+            personRepository.save(person);
+        } catch (DataAccessException e) {
+            logger.error(e.getMessage());
+            throw new CreatePersonException("An error occurred trying to create person");
+        }
     }
 }
