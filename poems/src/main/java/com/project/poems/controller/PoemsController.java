@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.stream.Stream;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/poems")
@@ -27,5 +29,21 @@ public class PoemsController {
             result.append(String.join(", </br>", authors.getAuthors()));
         }
         return result.toString();
+    }
+   @GetMapping("/authors-and-poems")
+   public String getAuthorsAndPoems() {
+       Random rand = new Random();
+       AllAuthorsDTO authors = poemsService.getAllAuthors();
+       Stream stream = authors.getAuthors().stream();
+       stream = stream
+               .filter(x -> (x.toString().charAt(0) != 'B' & x.toString().charAt(0) != 'C'))
+               .map(x -> "<li>" + x.toString()+ " - " + rand.nextInt(101) + "</li>");
+       StringBuilder result = new StringBuilder();
+       if (authors != null) {
+           result.append("Авторы: <ol>");
+           result.append(String.join("",stream.toList()));
+           result.append("</ol>");
+       }
+       return result.toString();
     }
 }
