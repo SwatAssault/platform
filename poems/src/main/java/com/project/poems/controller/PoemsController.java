@@ -36,18 +36,18 @@ public class PoemsController {
    public String getAuthorsAndPoems() {
        Random rand = new Random();
        AllAuthorsDTO authors = poemsService.getAllAuthors();
-       List<AuthorStats> authorsList = authors.getAuthors().stream()
+       List<AuthorStats> statistics = authors.getAuthors().stream()
                .filter(author -> !author.startsWith("B") && !author.startsWith("C"))
                .map(author -> new AuthorStats(author, rand.nextInt(101)))
                .toList();
        StringBuilder result = new StringBuilder();
        result.append("Авторы: </br> ");
        result.append("<ol>");
-       for (AuthorStats point : authorsList) {
+       for (AuthorStats author : statistics) {
            result.append("<li>");
-           result.append(point.getAuthors());
+           result.append(author.getAuthors());
            result.append(" - ");
-           result.append(point.getStats());
+           result.append(author.getPoemsNumber());
            result.append("</li>");
        }
        result.append("</ol>");

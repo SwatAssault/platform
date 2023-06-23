@@ -2,27 +2,27 @@ package com.project.poems.dto;
 
 
 public class AuthorStats {
-    private String authors;
-    private int stats;
+    private String author;
+    private int poemsNumber;
 
-    public AuthorStats(String authors, int stats) {
-        this.authors = authors;
-        this.stats = stats;
+    public AuthorStats(String authors, int poemsNumber) {
+        this.author = authors;
+        this.poemsNumber = poemsNumber;
     }
 
     public String getAuthors() {
-        return authors;
+        return author;
     }
 
-    public int getStats() {
-        return stats;
+    public int getPoemsNumber() {
+        return poemsNumber;
     }
 
     public void setAuthors(String authors) {
-        this.authors = authors;
+        this.author = authors;
     }
 
-    public void setStats(int stats) {
-        this.stats = stats;
+    public void setPoemsNumber(int stats) {
+        this.poemsNumber = stats;
     }
 }
