@@ -2,11 +2,12 @@ package com.project.poems.controller;
 
 import com.project.poems.api.PoemsService;
 import com.project.poems.dto.AllAuthorsDTO;
+import com.project.poems.dto.AuthorStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.stream.Stream;
+import java.util.List;
 import java.util.Random;
 
 @RestController
@@ -30,20 +31,26 @@ public class PoemsController {
         }
         return result.toString();
     }
+
    @GetMapping("/authors-and-poems")
    public String getAuthorsAndPoems() {
        Random rand = new Random();
        AllAuthorsDTO authors = poemsService.getAllAuthors();
-       Stream stream = authors.getAuthors().stream();
-       stream = stream
-               .filter(x -> (x.toString().charAt(0) != 'B' & x.toString().charAt(0) != 'C'))
-               .map(x -> "<li>" + x.toString()+ " - " + rand.nextInt(101) + "</li>");
+       List<AuthorStats> authorsList = authors.getAuthors().stream()
+               .filter(author -> !author.startsWith("B") && !author.startsWith("C"))
+               .map(author -> new AuthorStats(author, rand.nextInt(101)))
+               .toList();
        StringBuilder result = new StringBuilder();
-       if (authors != null) {
-           result.append("Авторы: <ol>");
-           result.append(String.join("",stream.toList()));
-           result.append("</ol>");
+       result.append("Авторы: </br> ");
+       result.append("<ol>");
+       for (AuthorStats point : authorsList) {
+           result.append("<li>");
+           result.append(point.getAuthors());
+           result.append(" - ");
+           result.append(point.getStats());
+           result.append("</li>");
        }
+       result.append("</ol>");
        return result.toString();
-    }
+   }
 }
