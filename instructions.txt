@@ -1,0 +1,10 @@
+Инструкция по деплою
+
+Настройка БД
+1. скачать и установить mysql server 8.0.33.0
+2. создать БД "platform"
+3. сконфигурировать параметры подключения к БД в app-module/src/resources/application.properties
+
+Настройка Angular
+1. скачать и установить nodejs
+2. установить npm package manager (npm install -g @angular/cli)

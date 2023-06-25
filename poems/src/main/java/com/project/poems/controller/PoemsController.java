@@ -2,10 +2,13 @@ package com.project.poems.controller;
 
 import com.project.poems.api.PoemsService;
 import com.project.poems.dto.AllAuthorsDTO;
+import com.project.poems.dto.AuthorStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/poems")
@@ -26,6 +29,23 @@ public class PoemsController {
             result.append("Авторы: </br>");
             result.append(String.join(", </br>", authors.getAuthors()));
         }
+        return result.toString();
+    }
+
+    @GetMapping("/authors-and-poems")
+    public String getAuthorsAndPoems() {
+        List<AuthorStats> statistics = poemsService.getStatistics();
+        StringBuilder result = new StringBuilder();
+        result.append("Авторы: </br> ");
+        result.append("<ol>");
+        for (AuthorStats author : statistics) {
+            result.append("<li>");
+            result.append(author.getAuthors());
+            result.append(" - ");
+            result.append(author.getPoemsNumber());
+            result.append("</li>");
+        }
+        result.append("</ol>");
         return result.toString();
     }
 }
