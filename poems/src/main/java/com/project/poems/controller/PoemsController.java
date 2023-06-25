@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
-import java.util.Random;
 
 @RestController
 @RequestMapping("/poems")
@@ -32,25 +32,20 @@ public class PoemsController {
         return result.toString();
     }
 
-   @GetMapping("/authors-and-poems")
-   public String getAuthorsAndPoems() {
-       Random rand = new Random();
-       AllAuthorsDTO authors = poemsService.getAllAuthors();
-       List<AuthorStats> statistics = authors.getAuthors().stream()
-               .filter(author -> !author.startsWith("B") && !author.startsWith("C"))
-               .map(author -> new AuthorStats(author, rand.nextInt(101)))
-               .toList();
-       StringBuilder result = new StringBuilder();
-       result.append("Авторы: </br> ");
-       result.append("<ol>");
-       for (AuthorStats author : statistics) {
-           result.append("<li>");
-           result.append(author.getAuthors());
-           result.append(" - ");
-           result.append(author.getPoemsNumber());
-           result.append("</li>");
-       }
-       result.append("</ol>");
-       return result.toString();
-   }
+    @GetMapping("/authors-and-poems")
+    public String getAuthorsAndPoems() {
+        List<AuthorStats> statistics = poemsService.getStatistics();
+        StringBuilder result = new StringBuilder();
+        result.append("Авторы: </br> ");
+        result.append("<ol>");
+        for (AuthorStats author : statistics) {
+            result.append("<li>");
+            result.append(author.getAuthors());
+            result.append(" - ");
+            result.append(author.getPoemsNumber());
+            result.append("</li>");
+        }
+        result.append("</ol>");
+        return result.toString();
+    }
 }

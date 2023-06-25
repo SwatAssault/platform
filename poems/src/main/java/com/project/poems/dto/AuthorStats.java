@@ -5,8 +5,8 @@ public class AuthorStats {
     private String author;
     private int poemsNumber;
 
-    public AuthorStats(String authors, int poemsNumber) {
-        this.author = authors;
+    public AuthorStats(String author, int poemsNumber) {
+        this.author = author;
         this.poemsNumber = poemsNumber;
     }
 

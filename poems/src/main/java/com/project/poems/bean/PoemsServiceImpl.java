@@ -6,6 +6,7 @@ import com.project.platform.base.http.Payload;
 import com.project.platform.base.json.JsonMarshaller;
 import com.project.poems.api.PoemsService;
 import com.project.poems.dto.AllAuthorsDTO;
+import com.project.poems.dto.AuthorStats;
 import com.project.poems.utils.PoemsUrls;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Random;
 import java.util.function.Function;
 
 @Service
@@ -42,6 +45,16 @@ public class PoemsServiceImpl implements PoemsService {
         }
 
         return payload.getResponseObject();
+    }
+
+    @Override
+    public List<AuthorStats> getStatistics() {
+        Random rand = new Random();
+        AllAuthorsDTO authors = getAllAuthors();
+        return authors.getAuthors().stream()
+                .filter(author -> !author.startsWith("B") && !author.startsWith("C"))
+                .map(author -> new AuthorStats(author, rand.nextInt(101)))
+                .toList();
     }
 
     // TODO добавить нормальную обработку ошибок
