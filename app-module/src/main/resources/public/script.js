@@ -1,5 +1,5 @@
 function test() {
-    var url = "http://localhost:8080/blog/person/all";
+    var url = "http://localhost:8080/blog/users";
     $.ajax({
         type: 'GET',
         url: url,

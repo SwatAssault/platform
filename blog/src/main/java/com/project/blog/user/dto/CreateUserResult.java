@@ -1,10 +1,10 @@
-package com.project.blog.person.model;
+package com.project.blog.user.dto;
 
-public class CreatePersonResult {
+public class CreateUserResult {
     private boolean success;
     private String errorMessage;
 
-    public CreatePersonResult(boolean success) {
+    public CreateUserResult(boolean success) {
         this.success = success;
     }
 
