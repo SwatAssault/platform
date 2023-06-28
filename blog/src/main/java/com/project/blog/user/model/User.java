@@ -1,5 +1,6 @@
 package com.project.blog.user.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.blog.posts.model.Post;
 import jakarta.persistence.*;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,10 +41,11 @@ public class User {
 
     private String lastName;
 
+    @JsonFormat(pattern = "dd.MM.yyyy hh:mm:ss")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
-    private Date created;
+    private LocalDateTime created;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
