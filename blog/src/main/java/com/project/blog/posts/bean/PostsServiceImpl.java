@@ -27,12 +27,13 @@ public class PostsServiceImpl implements PostsService {
     }
 
     @Override
-    public void createPost(Post post, int userId) {
+    public Post createPost(Post post, int userId) {
         User user = userService.getUser(userId);
         if (user != null) {
             post.setUser(user);
             postsRepository.save(post);
         }
+        return post;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class PostsServiceImpl implements PostsService {
     }
 
     @Override
-    public void addComment(Comment comment, int userId, int postId) {
+    public Comment addComment(Comment comment, int userId, int postId) {
         User user = userService.getUser(userId);
         Post post = postsRepository.findById(postId).orElse(null);
         if (user != null && post != null) {
@@ -53,6 +54,7 @@ public class PostsServiceImpl implements PostsService {
             comment.setPost(post);
             commentsRepository.save(comment);
         }
+        return comment;
     }
 
     @Override

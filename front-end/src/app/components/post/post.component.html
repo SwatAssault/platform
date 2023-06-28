@@ -1,0 +1,25 @@
+<div class="py-4 px-6 border-2 border-sky-500 rounded flex-col mb-2 mt-2">
+  <div>
+    <div class="flex-row">
+      <h4 class="text-left">postId: {{ post.id }}</h4>
+      <h4 class="text-right">{{ post.created}}</h4>
+    </div>
+    <h2 class="mb-2 font-bold text-lg text-center">{{ post.title }}</h2>
+    <p class="mb-2 text-lg word-wrap: break-word">{{ post.text }}</p>
+
+    <button
+      type="button"
+      class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl
+       focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800
+       font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+      (click)="toggleCommentsVisibility()"
+    >Show comments</button>
+
+    <comp-comments-list
+      *ngIf="showComments"
+      [postId]="post.id"
+    ></comp-comments-list>
+  </div>
+</div>
+
+
