@@ -5,6 +5,7 @@ import com.project.poems.dto.AllAuthorsDTO;
 import com.project.poems.dto.AuthorStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,6 +47,17 @@ public class PoemsController {
             result.append("</li>");
         }
         result.append("</ol>");
+        return result.toString();
+    }
+
+    @GetMapping("/titles/{authorName}")
+    public String getAuthorTitles(@PathVariable String authorName) {
+        StringBuilder result = new StringBuilder();
+        List<String> allAuthorTitles = poemsService.getAuthorTitles(authorName);
+        result.append(authorName).append(": </br>");
+        for (String title : allAuthorTitles) {
+            result.append("-\"").append(title).append("\"").append(", </br>");
+        }
         return result.toString();
     }
 }

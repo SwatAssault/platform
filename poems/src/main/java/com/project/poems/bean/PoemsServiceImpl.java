@@ -7,6 +7,7 @@ import com.project.platform.base.json.JsonMarshaller;
 import com.project.poems.api.PoemsService;
 import com.project.poems.dto.AllAuthorsDTO;
 import com.project.poems.dto.AuthorStats;
+import com.project.poems.dto.AllPoemsTitles;
 import com.project.poems.utils.PoemsUrls;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
@@ -34,16 +36,12 @@ public class PoemsServiceImpl implements PoemsService {
     public AllAuthorsDTO getAllAuthors() {
         Payload<AllAuthorsDTO> payload = processResponse(
                 httpRequester.get(
-                        PoemsUrls.Endpoint.AUTHORS.getUrl(),
-                        null
-                ),
+                        PoemsUrls.Endpoint.AUTHORS.getUrl(), null),
                 (response) -> JsonMarshaller.unmarshall(response, new TypeReference<>() {})
         );
-
         if (payload.getResponseObject() == null) {
             throw new RuntimeException("Error ");
         }
-
         return payload.getResponseObject();
     }
 
@@ -54,6 +52,18 @@ public class PoemsServiceImpl implements PoemsService {
         return authors.getAuthors().stream()
                 .filter(author -> !author.startsWith("B") && !author.startsWith("C"))
                 .map(author -> new AuthorStats(author, rand.nextInt(101)))
+                .toList();
+    }
+
+    @Override
+    public List<String> getAuthorTitles(String authorName) {
+        HashMap<String, String> parameters = new HashMap<>();
+        parameters.put("authorName", authorName);
+        ResponseEntity<String> titles = httpRequester.get(PoemsUrls.Endpoint.TITLES_BY_AUTHOR.getUrl(), parameters);
+        List<AllPoemsTitles> result = JsonMarshaller.unmarshall(titles.getBody(), new TypeReference<>() {
+        });
+        return result.stream()
+                .map(AllPoemsTitles::getTitle)
                 .toList();
     }
 

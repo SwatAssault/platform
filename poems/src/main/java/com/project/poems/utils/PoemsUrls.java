@@ -5,8 +5,8 @@ public final class PoemsUrls {
     private static final String POETRY_DB_URL = "https://poetrydb.org";
 
     public enum Endpoint {
-        AUTHORS("/authors");
-
+        AUTHORS("/authors"),
+        TITLES_BY_AUTHOR("/author/{authorName}/author,title");
         private final String url;
 
         Endpoint(String url) {
