@@ -7,6 +7,7 @@ import com.project.platform.base.json.JsonMarshaller;
 import com.project.poems.api.PoemsService;
 import com.project.poems.dto.AllAuthorsDTO;
 import com.project.poems.dto.AuthorStats;
+import com.project.poems.dto.AllPoemsTitles;
 import com.project.poems.utils.PoemsUrls;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,16 +35,12 @@ public class PoemsServiceImpl implements PoemsService {
     public AllAuthorsDTO getAllAuthors() {
         Payload<AllAuthorsDTO> payload = processResponse(
                 httpRequester.get(
-                        PoemsUrls.Endpoint.AUTHORS.getUrl(),
-                        null
-                ),
+                        PoemsUrls.Endpoint.AUTHORS.getUrl(), null),
                 (response) -> JsonMarshaller.unmarshall(response, new TypeReference<>() {})
         );
-
         if (payload.getResponseObject() == null) {
             throw new RuntimeException("Error ");
         }
-
         return payload.getResponseObject();
     }
 
@@ -54,6 +51,15 @@ public class PoemsServiceImpl implements PoemsService {
         return authors.getAuthors().stream()
                 .filter(author -> !author.startsWith("B") && !author.startsWith("C"))
                 .map(author -> new AuthorStats(author, rand.nextInt(101)))
+                .toList();
+    }
+
+    @Override
+    public List<String> getAuthorTitles(String authorName) {
+        ResponseEntity<String> titles = httpRequester.get(PoemsUrls.Endpoint.AUTHOR.getUrl(), authorName);
+        List<AllPoemsTitles> result = JsonMarshaller.unmarshall(titles.getBody(), new TypeReference<>() {});
+        return result.stream()
+                .map(AllPoemsTitles::getTitle)
                 .toList();
     }
 
