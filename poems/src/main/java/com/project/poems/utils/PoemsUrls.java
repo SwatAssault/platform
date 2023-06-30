@@ -6,7 +6,7 @@ public final class PoemsUrls {
 
     public enum Endpoint {
         AUTHORS("/authors"),
-        AUTHOR("/author/{authorName}/author,title");
+        TITLES_BY_AUTHOR("/author/{authorName}/author,title");
         private final String url;
 
         Endpoint(String url) {

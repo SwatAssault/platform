@@ -27,6 +27,7 @@ public interface PoemsService {
 
     /**
      * Получение всех поэм автора по его имени
+     *
      * @param authorName имя автора
      * @return Коллекция названий поэм автора {@link AllPoemsTitles}
      */

@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
@@ -56,8 +57,11 @@ public class PoemsServiceImpl implements PoemsService {
 
     @Override
     public List<String> getAuthorTitles(String authorName) {
-        ResponseEntity<String> titles = httpRequester.get(PoemsUrls.Endpoint.AUTHOR.getUrl(), authorName);
-        List<AllPoemsTitles> result = JsonMarshaller.unmarshall(titles.getBody(), new TypeReference<>() {});
+        HashMap<String, String> parameters = new HashMap<>();
+        parameters.put("authorName", authorName);
+        ResponseEntity<String> titles = httpRequester.get(PoemsUrls.Endpoint.TITLES_BY_AUTHOR.getUrl(), parameters);
+        List<AllPoemsTitles> result = JsonMarshaller.unmarshall(titles.getBody(), new TypeReference<>() {
+        });
         return result.stream()
                 .map(AllPoemsTitles::getTitle)
                 .toList();
