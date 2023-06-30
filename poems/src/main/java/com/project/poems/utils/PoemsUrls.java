@@ -3,6 +3,7 @@ package com.project.poems.utils;
 public final class PoemsUrls {
 
     private static final String POETRY_DB_URL = "https://poetrydb.org";
+
     public enum Endpoint {
         AUTHORS("/authors"),
         AUTHOR("/author/{authorName}/author,title");
