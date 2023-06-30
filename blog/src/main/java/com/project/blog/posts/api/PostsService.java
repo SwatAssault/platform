@@ -10,10 +10,11 @@ public interface PostsService {
     /**
      * Создать пост
      *
-     * @param post пост dto
+     * @param post   пост dto
      * @param userId id пользователя, которому принадлежит пост
+     * @return
      */
-    void createPost(Post post, int userId);
+    Post createPost(Post post, int userId);
 
     /**
      * Получить все посты пользователя
@@ -23,7 +24,7 @@ public interface PostsService {
      */
     Set<Post> getPostsByUser(int userId);
 
-    void addComment(Comment comment, int userId, int postId);
+    Comment addComment(Comment comment, int userId, int postId);
 
     Set<Comment> getComments(int postId);
 }

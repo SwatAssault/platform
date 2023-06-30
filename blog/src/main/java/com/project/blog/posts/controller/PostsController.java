@@ -22,11 +22,11 @@ public class PostsController {
     }
 
     @PostMapping("/posts/user/{userId}")
-    public void createPost(
+    public Post createPost(
             @PathVariable int userId,
             @RequestBody Post post
     ) {
-        postsService.createPost(post, userId);
+        return postsService.createPost(post, userId);
     }
 
     @GetMapping("/posts/user/{userId}")
@@ -35,12 +35,12 @@ public class PostsController {
     }
 
     @PostMapping("posts/{postId}/comments/user/{userId}")
-    public void addComment(
+    public Comment addComment(
             @PathVariable int postId,
             @PathVariable int userId,
             @RequestBody Comment comment
     ) {
-        postsService.addComment(comment, userId, postId);
+        return postsService.addComment(comment, userId, postId);
     }
 
     @GetMapping("/posts/{postId}/comments")
